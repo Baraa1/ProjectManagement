@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %} Dashboard {% endblock %}
+{% block display-content %}
+<!--Div that will hold the pie chart-->
+<div class="charts">
+  {% include 'filters/month-filter.html' %}
+  <div class="small-chart1">
+    <p>Records per Week</p>
+    <canvas id="chart1"></canvas>
+  </div>
+
+  {% include 'filters/stands-filter.html' %}
+  <div class="small-chart2">
+    <p>Records per Stand</p>
+    <canvas id="chart2"></canvas>
+  </div>
+  
+  {% include 'filters/users-filter.html' %}
+  <div class="big-chart">
+    <p>Records per User</p>
+    <canvas id="chart3"></canvas>
+  </div> 
+</div>
+{% endblock %}
+{% block JS %}
+  <!-- Chart JS-->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- auto color plugin https://github.com/kurkle/chartjs-plugin-autocolors -->
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-autocolors"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+  <script>
+    const autocolors = window['chartjs-plugin-autocolors'];
+    Chart.register(autocolors);
+    Chart.register(ChartDataLabels)
+  </script>
+  <div id="month-pie-chart-js">{% include 'charts/month-records-chart.html' %}</div>
+  <div id="stands-pie-chart-js">{% include 'charts/stand-records-chart.html' %}</div>
+  <div id="users-bar-chart-js">{% include 'charts/user-records-chart.html' %}</div>
+  <!--HTMX JS-->
+  <script src="https://unpkg.com/htmx.org@1.8.4" integrity="sha384-wg5Y/JwF7VxGk4zLsJEcAojRtlVp1FKKdGy1qN+OMtdq72WRvX/EdRdqg/LOhYeV" crossorigin="anonymous"></script>
+{% endblock %}

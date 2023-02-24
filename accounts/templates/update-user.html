@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Accounts {% endblock %}
+{% block display-content %}
+    <div class="form-wrapper">
+        <form method="post" enctype="multipart/form-data" action="" novalidate>
+            {% csrf_token %}
+            <div class="form-custom form-floating mb-3">
+                {% include 'includes/user-form.html' %}
+                <!-- Button here because user form is used in more than one pages with diffrent functions-->
+                <div class="fr-btn">
+                    <button type="submit" class="btn btn-primary btn-lg">Update</button>
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-outline-danger btn-lg">Delete User</button>
+                </div>
+            </div>
+        </form>
+        {% include 'htmx/delete-user-modal.html' %}
+    </div>
+{% endblock %}
+{% block JS %}
+    <!--Bootstrap JS-->
+    <script src="{% static 'js/popovers.js' %}"></script>
+{% endblock %}

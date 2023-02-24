@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} PBBs {% endblock %}
+{% block search_field %}
+    {% include "htmx/pbbs-search-form.html" %}
+{% endblock %}
+{% block display-content %}
+    {% include "htmx/pbbs-filter.html" %}
+    <div id="pbbs-table">
+        {% include "tables/pbbs-table.html" %}
+    </div>
+    {% block floating_btn %}
+        <a href="{% url 'create_pbb' %}" class="btn btn-danger rounded-circle position-fixed bottom-0 end-0 m-5">+</a>
+    {% endblock %}
+{% endblock %}
+{% block JS %}
+    <!--HTMX JS-->
+    <script src="https://unpkg.com/htmx.org@1.8.4" integrity="sha384-wg5Y/JwF7VxGk4zLsJEcAojRtlVp1FKKdGy1qN+OMtdq72WRvX/EdRdqg/LOhYeV" crossorigin="anonymous"></script>
+{% endblock %}
