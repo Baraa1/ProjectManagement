@@ -102,7 +102,7 @@ def filter_stands(request):
 @login_required(login_url='login')
 @user_passes_test(view_records)
 def filter_users(request):
-    users = CustomUser.objects.filter(is_superuser = False, groups__name='Operator')
+    users = CustomUser.objects.filter(Q(is_superuser = False) & Q(Q(groups__name='Operator') | Q(groups__name='Operation Supervisor')))
     users_dict = {}
 
     if request.method == 'POST':
