@@ -92,6 +92,8 @@ class CreateUndockingForm(forms.ModelForm):
             'operator2',
             'flight_no2',
             'door_close',
+            'b_door_close',
+            'c_door_close',
             'undocked',
             'b_used',
             'c_used',
@@ -103,6 +105,8 @@ class CreateUndockingForm(forms.ModelForm):
             "operator2":  forms.TextInput(attrs={"type":"text"}),
             "undocked":   forms.DateTimeInput(attrs={"type":"datetime-local"}),
             "door_close": forms.TimeInput(attrs={"type":"time"}),
+            "b_door_close": forms.TimeInput(attrs={"type":"time"}),
+            "c_door_close": forms.TimeInput(attrs={"type":"time"}),
             "b_undocked": forms.TimeInput(attrs={"type":"time"}),
             "c_undocked": forms.TimeInput(attrs={"type":"time"}),
         }
@@ -110,6 +114,8 @@ class CreateUndockingForm(forms.ModelForm):
             'operator2': 'Required',
             'flight_no2': 'Required',
             'door_close': 'Required',
+            'b_door_close': 'Required',
+            'c_door_close': 'Required',
             'undocked': 'Required',
         }
 
@@ -135,7 +141,7 @@ class CreateUndockingForm(forms.ModelForm):
         c_used = self.cleaned_data.get('c_used')
 
         # if user checked b_used then they must fill b_docked field
-        if b_used and self.cleaned_data['b_undocked'] == None:
+        if b_used and (self.cleaned_data['b_undocked'] == None or self.cleaned_data['b_door_close'] == None):
             msg = forms.ValidationError("This field is required.")
             self.add_error('b_undocked', msg)
         elif not b_used and self.cleaned_data['b_undocked'] != None:
@@ -143,7 +149,7 @@ class CreateUndockingForm(forms.ModelForm):
             # submitted bravo docking time even if b_used
             # was not selected
             self.cleaned_data['b_undocked'] = None
-        if c_used and self.cleaned_data['c_undocked'] == None:
+        if c_used and (self.cleaned_data['c_undocked'] == None or self.cleaned_data['c_door_close'] == None):
             msg = forms.ValidationError("This field is required.")
             self.add_error('c_undocked', msg)
         elif not c_used and self.cleaned_data['c_undocked'] != None:
@@ -162,6 +168,8 @@ class CreateNoDockingForm(forms.ModelForm):
             'ac_type',
             'ac_reg',
             'door_close',
+            'b_door_close',
+            'c_door_close',
             'undocked',
             'b_used',
             'c_used',
@@ -175,6 +183,8 @@ class CreateNoDockingForm(forms.ModelForm):
             "ac_reg": forms.TextInput(attrs={"list":"ac_reg"}),
             "undocked":    forms.DateTimeInput(attrs={"type":"datetime-local", "value":today_now}),
             "door_close": forms.TimeInput(attrs={"type":"time", "value":now[:5]}),
+            "b_door_close": forms.TimeInput(attrs={"type":"time"}),
+            "c_door_close": forms.TimeInput(attrs={"type":"time"}),
             "b_undocked":  forms.TimeInput(attrs={"type":"time"}),
             "c_undocked":  forms.TimeInput(attrs={"type":"time"}),
         }
@@ -230,6 +240,8 @@ class UpdateRecordForm(forms.ModelForm):
             'chocks_on',
             'docked',
             'door_close',
+            'b_door_close',
+            'c_door_close',
             'undocked',
             'b_used',
             'c_used',
@@ -243,6 +255,8 @@ class UpdateRecordForm(forms.ModelForm):
             "chocks_on":  forms.TimeInput(attrs={"type":"time"}),
             "docked":     forms.DateTimeInput(attrs={"type":"datetime-local"}),
             "door_close": forms.TimeInput(attrs={"type":"time"}),
+            "b_door_close": forms.TimeInput(attrs={"type":"time"}),
+            "c_door_close": forms.TimeInput(attrs={"type":"time"}),
             "undocked":   forms.DateTimeInput(attrs={"type":"datetime-local"}),
             "b_docked":   forms.TimeInput(attrs={"type":"time"}),
             "b_undocked": forms.TimeInput(attrs={"type":"time"}),

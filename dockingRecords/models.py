@@ -21,10 +21,12 @@ class DockingRecord(models.Model):
     docked     = models.DateTimeField(blank=True, null=True)
     chocks_on  = models.TimeField(blank=True, null=True)
     # Required at undocking or no docking
-    operator2  = models.ForeignKey(SecondOperator, blank=True, null=True, on_delete=models.SET_NULL)
-    flight_no2 = models.CharField(max_length=10, blank=True, null=True)
-    door_close = models.TimeField(blank=True, null=True)
-    undocked   = models.DateTimeField(blank=True, null=True)
+    operator2    = models.ForeignKey(SecondOperator, blank=True, null=True, on_delete=models.SET_NULL)
+    flight_no2   = models.CharField(max_length=10, blank=True, null=True)
+    door_close   = models.TimeField(blank=True, null=True)
+    b_door_close = models.TimeField(blank=True, null=True)
+    c_door_close = models.TimeField(blank=True, null=True)
+    undocked     = models.DateTimeField(blank=True, null=True)
 
     # not required but it tells the view how to read this record
     # false means this is a full record

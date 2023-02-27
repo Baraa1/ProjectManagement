@@ -113,6 +113,18 @@
     </div>
 
     <div class="form-floating mb-3 fr-inp">
+        {% if form.b_door_close.errors %}
+            {% render_field form.b_door_close name="b_door_close" class="form-control is-invalid" id="b_door_close" disabled="" %}
+            {% for error in form.b_door_close.errors  %}
+                <span>{{ error }}</span>
+            {% endfor %}
+        {% else %}
+            {% render_field form.b_door_close name="b_door_close" class="form-control" id="b_door_close" disabled="" %}
+        {% endif %}
+        <label for="b_door_close">Door Close</label>
+    </div>
+
+    <div class="form-floating mb-3 fr-inp">
         {% if form.b_undocked.errors %}
             {% render_field form.b_undocked name="b_undocked" class="form-control is-invalid" id="b_undocked" disabled="" %}
             {% for error in form.b_undocked.errors  %}
@@ -137,6 +149,18 @@
         {% else %}
             {% render_field form.c_used name="c_used" class="disabled-input form-control" id="c_used" %}
         {% endif %}
+    </div>
+
+    <div class="form-floating mb-3 fr-inp">
+        {% if form.c_door_close.errors %}
+            {% render_field form.c_door_close name="c_door_close" class="form-control is-invalid" id="c_door_close" disabled="" %}
+            {% for error in form.c_door_close.errors  %}
+                <span>{{ error }}</span>
+            {% endfor %}
+        {% else %}
+            {% render_field form.c_door_close name="c_door_close" class="form-control" id="c_door_close" disabled="" %}
+        {% endif %}
+        <label for="c_door_close">Door Close</label>
     </div>
 
     <div class="form-floating mb-3 fr-inp">
